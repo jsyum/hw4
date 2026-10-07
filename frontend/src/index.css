@@ -1,0 +1,47 @@
+*, *::before, *::after { box-sizing: border-box; }
+html, body, #root { min-height: 100%; }
+
+body {
+  margin: 0;
+  color: var(--parchment);
+  font-family: var(--font-ui);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+
+  /* The reading room after hours: lamplight pooling at the top, deep blue
+     falling away below, over a faint woven-linen weave. */
+  background-color: var(--night-900);
+  background-image:
+    radial-gradient(1100px 520px at 50% -8%, rgba(240, 198, 122, 0.10), transparent 70%),
+    radial-gradient(760px 420px at 100% 0%, rgba(15, 77, 146, 0.22), transparent 65%),
+    linear-gradient(180deg, var(--night-850) 0%, var(--night-900) 45%, var(--night-950) 100%);
+  background-attachment: fixed;
+
+  /* paw print, following you around the stacks */
+  cursor: var(--paw-idle);
+}
+
+/* the "clickable" paw — heavier, haloed */
+a, button, select, summary, [role='button'], .card, label.filter span { cursor: var(--paw-press); }
+input, textarea { cursor: text; }
+button:disabled, input:disabled, select:disabled { cursor: not-allowed; }
+
+img { max-width: 100%; display: block; }
+a { color: var(--brass-300); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
+  color: var(--parchment);
+}
+
+::selection { background: var(--brass-600); color: var(--night-950); }
+
+:focus-visible {
+  outline: 2px solid var(--brass-300);
+  outline-offset: 2px;
+  border-radius: 4px;
+}

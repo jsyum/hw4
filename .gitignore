@@ -1,0 +1,23 @@
+.env
+**/.env
+.venv/
+**/.venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+.DS_Store
+
+# Course data: the SQLite DB and the product photos. This repo goes public —
+# neither the database nor the images may ever be committed.
+data/
+**/data/
+*.db
+*.sqlite
+*.sqlite3
+
+# Node / build output (frontend/.gitignore also covers these; repeated here so the
+# rule holds no matter where a node_modules ends up)
+node_modules/
+**/node_modules/
+dist/
+**/dist/

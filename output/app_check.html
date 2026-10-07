@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Customs — app check</title>
+<style>
+  :root {
+    --night:#0a1628; --panel:#0d1d33; --rule:#1c3454; --oak:#6b4a2f;
+    --brass:#c9a227; --brass-l:#e3c05c; --parchment:#f0e6d2; --soft:#bfb296;
+    --faint:#8d8471; --ok:#7fb496;
+    --ui:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    --display:'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--night); color:var(--parchment); font-family:var(--ui);
+    line-height:1.6;
+    background-image:radial-gradient(900px 420px at 50% -6%,rgba(240,198,122,.08),transparent 70%); }
+  .wrap { width:min(1080px,100% - 3rem); margin:0 auto; padding:3rem 0 5rem; }
+  h1 { font-family:var(--display); font-size:clamp(2rem,5vw,2.9rem); margin:0 0 .3rem; }
+  h2 { font-family:var(--display); font-size:1.5rem; color:var(--brass-l); margin:0 0 .2rem; }
+  h3 { font-size:.78rem; letter-spacing:.14em; text-transform:uppercase; color:var(--brass);
+    margin:1.6rem 0 .5rem; }
+  .eyebrow { font-size:.72rem; letter-spacing:.18em; text-transform:uppercase;
+    color:var(--brass); margin:0 0 .5rem; }
+  .lede { color:var(--soft); max-width:70ch; }
+  section { background:linear-gradient(180deg,var(--panel),#0b182c); border:1px solid var(--rule);
+    border-top:3px solid var(--oak); border-radius:14px; padding:1.6rem 1.8rem 2rem;
+    margin:2rem 0; }
+  .check-no { display:inline-grid; place-items:center; width:30px; height:30px; border-radius:50%;
+    background:var(--brass); color:#2a1e08; font-weight:800; margin-right:.6rem; font-size:.9rem; }
+  figure { margin:1.2rem 0 0; }
+  figure img { width:100%; border:1px solid var(--rule); border-radius:10px; display:block;
+    box-shadow:0 18px 44px -18px #000; }
+  figcaption { color:var(--faint); font-size:.82rem; margin-top:.6rem; font-style:italic; }
+  .split { display:grid; grid-template-columns:1fr 300px; gap:1.6rem; align-items:start; }
+  @media (max-width:860px) { .split { grid-template-columns:1fr; } }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; }
+  th,td { text-align:left; padding:.42rem .5rem; border-bottom:1px solid var(--rule); }
+  thead th { color:var(--faint); font-size:.7rem; letter-spacing:.1em; text-transform:uppercase;
+    font-weight:600; }
+  td.num, th.num { text-align:right; font-variant-numeric:tabular-nums; }
+  .db { background:#07101f; border:1px solid var(--rule); border-radius:10px; padding:1rem 1.1rem; }
+  .db h4 { margin:0 0 .6rem; font-size:.74rem; letter-spacing:.12em; text-transform:uppercase;
+    color:var(--brass); }
+  .quote { background:#07101f; border-left:3px solid var(--brass); border-radius:0 8px 8px 0;
+    padding:.8rem 1rem; white-space:pre-wrap; font-size:.9rem; color:var(--parchment); margin:.5rem 0 0; }
+  .asked { color:var(--brass-l); font-weight:600; }
+  ul.ticks { list-style:none; padding:0; margin:.6rem 0 0; font-size:.88rem; }
+  ul.ticks li { padding:.15rem 0; color:var(--soft); }
+  .tick { color:var(--ok); font-weight:700; margin-right:.4rem; }
+  .verdict { margin-top:1.2rem; padding:.75rem 1rem; border-radius:8px; font-size:.9rem;
+    background:rgba(127,180,150,.1); border:1px solid rgba(127,180,150,.4); color:#cfe8da; }
+  .meta { color:var(--faint); font-size:.8rem; }
+  code { background:#07101f; padding:.1rem .35rem; border-radius:4px; font-size:.85em;
+    color:var(--brass-l); }
+  footer { color:var(--faint); font-size:.8rem; border-top:1px solid var(--rule);
+    padding-top:1.2rem; margin-top:2.5rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <p class="eyebrow">Campus Customs · Problem 11</p>
+  <h1>App check</h1>
+  <p class="lede">
+    Three checks run against the running site with Playwright — a real browser, the real
+    frontend on <code>localhost:5173</code>, and the real FastAPI backend and SQLite
+    catalogue behind it. Every screenshot below was captured during that run, and every
+    number the assistant stated was compared afterwards against the database.
+  </p>
+  <p class="meta">Chat sessions were run as a guest, so each answer was produced fresh rather than recalled from saved history.</p>
+
+  <!-- ─────────── CHECK 1 ─────────── -->
+  <section>
+    <h2><span class="check-no">1</span>Inventory and price, straight from the database</h2>
+    <p class="lede">The assistant is asked for a specific product's price and its stock in every size.</p>
+
+    <div class="split">
+      <div>
+        <h3>What was asked</h3>
+        <p class="asked">“How much is the Basic Hoodie Big Yale, and how many do you have in each size?”</p>
+        <h3>What it answered</h3>
+        <div class="quote">The Basic Hoodie Big Yale is $68, and we have it in every size right now — a navy pullover with the white YALE lettering across the chest and a kangaroo pocket.
+
+Counts by size: XS 15, S 5, M 5, L 8, XL 2, XXL 25. XL is down to the last couple, so worth grabbing soon if that&#x27;s your size.</div>
+      </div>
+
+      <div class="db">
+        <h4>The database says</h4>
+        <p style="margin:.1rem 0 .7rem"><strong>Basic Hoodie Big Yale</strong><br>
+           <span class="meta">price</span> <strong>$68.00</strong></p>
+        <table>
+          <thead><tr><th>Size</th><th class="num">Qty</th></tr></thead>
+          <tbody>
+<tr><th>XS</th><td class='num'>15</td></tr>
+<tr><th>S</th><td class='num'>5</td></tr>
+<tr><th>M</th><td class='num'>5</td></tr>
+<tr><th>L</th><td class='num'>8</td></tr>
+<tr><th>XL</th><td class='num'>2</td></tr>
+<tr><th>XXL</th><td class='num'>25</td></tr>
+          </tbody>
+        </table>
+        <p class="meta" style="margin:.6rem 0 0">total 60 units</p>
+      </div>
+    </div>
+
+    <figure>
+      <img src="app_check_images/01-inventory.png" alt="The Campus Customs site with the chat panel open, showing the assistant's answer about the Basic Hoodie Big Yale's price and per-size stock.">
+      <figcaption>The reference desk open on the home page, answering the inventory question.</figcaption>
+    </figure>
+
+    <h3>What this proves</h3>
+    <ul class="ticks">
+<li><span class='tick'>✓</span> price $68</li>
+<li><span class='tick'>✓</span> XS = 15</li>
+<li><span class='tick'>✓</span> S = 5</li>
+<li><span class='tick'>✓</span> M = 5</li>
+<li><span class='tick'>✓</span> L = 8</li>
+<li><span class='tick'>✓</span> XL = 2</li>
+<li><span class='tick'>✓</span> XXL = 25</li>
+    </ul>
+    <div class="verdict">
+      Every figure in the answer — the $68 price and all six per-size counts — matches the
+      <code>catalogue</code> and <code>inventory</code> tables exactly. The assistant reached
+      these by calling its <code>get_product_details</code> tool; it has no way to state a
+      price or a stock level that is not in the database.
+    </div>
+  </section>
+
+  <!-- ─────────── CHECK 2 ─────────── -->
+  <section>
+    <h2><span class="check-no">2</span>A category question draws product cards onto the page</h2>
+    <p class="lede">A browsing question, answered in prose, with the matching products rendered as real cards in the main area of the site.</p>
+
+    <h3>What was asked</h3>
+    <p class="asked">“What hoodies do you have?”</p>
+    <h3>What it answered</h3>
+    <div class="quote">We have 27 hoodies, ranging from $45 to $88 — here are six to start. They split roughly into pullovers and full-zips, mostly navy or heather gray, with a few branded makes like Champion and Brooks Brothers at the top of the range.
+
+Anything particular you&#x27;re after — a zip or a pullover, a colour, or a price you want to stay under?</div>
+
+    <figure>
+      <img src="app_check_images/02-category-cards.png" alt="The home page showing six hoodie product cards under the heading Matches for hoodie, with the chat panel open beside them.">
+      <figcaption>Six product cards appear on the page, captioned “FROM YOUR CHAT · Matches for “hoodie” · Showing 6 of 27 products in the catalogue. · Clear”.</figcaption>
+    </figure>
+
+    <h3>Cards rendered</h3>
+    <ul class="ticks">
+<li>Basic Hoodie Big Yale</li>
+<li>Brooks Brothers Double Knit Full Zip Hoodie Yale</li>
+<li>Champion Full Zip Hood</li>
+<li>Champion Reverse Weave Hoodie 1</li>
+<li>Crew Left Chest Hoodie</li>
+<li>District Vit Hoodie Vintage Bulldog</li>
+    </ul>
+
+    <h3>What this proves</h3>
+    <div class="verdict">
+      The products are returned as <strong>structured data</strong> in the chat API's
+      <code>products</code> array — built from the catalogue rows the agent's search tool
+      returned, not parsed out of its text — so a card cannot show an invented product,
+      price, or photo. All six names above exist in the <code>catalogue</code> table. The
+      caption reports <strong>6 of 27</strong>, the real number of hooded products, so a
+      sample is never presented as the whole answer. Each card is clickable and opens that
+      product's own page.
+    </div>
+  </section>
+
+  <!-- ─────────── CHECK 3 ─────────── -->
+  <section>
+    <h2><span class="check-no">3</span>Filter and sort (Problem 9) agreeing with the assistant</h2>
+    <p class="lede">
+      The Products page filtered to <strong>hoodies</strong> and sorted <strong>price low to
+      high</strong>, with the assistant asked the same question in the panel beside it.
+    </p>
+
+    <div class="split">
+      <div>
+        <h3>What was asked</h3>
+        <p class="asked">“What&#x27;s your cheapest hoodie?”</p>
+        <h3>What it answered</h3>
+        <div class="quote">Our cheapest hoodies are $45, and there are two of them at that price: the Under Armour Gameday Double Knit Hood in navy, and the Yale Sports Hoodie Tennis in heather gray. Both are currently stocked in every size from XS to XXL.
+
+We have 27 hoodies in all, ranging from $45 to $88 — happy to narrow things down if you have a colour or style in mind.</div>
+      </div>
+      <div class="db">
+        <h4>Top of the sorted grid</h4>
+        <table>
+          <thead><tr><th>#</th><th>Product</th><th class="num">Price</th></tr></thead>
+          <tbody>
+<tr><td>1</td><td>Ua Gameday Double Knit Hood</td><td class='num'>$45.00</td></tr>
+<tr><td>2</td><td>Yale Sports Hoodie Tennis</td><td class='num'>$45.00</td></tr>
+<tr><td>3</td><td>Basic Hoodie Big Yale</td><td class='num'>$68.00</td></tr>
+<tr><td>4</td><td>Champion Reverse Weave Hoodie 1</td><td class='num'>$68.00</td></tr>
+          </tbody>
+        </table>
+        <p class="meta" style="margin:.6rem 0 0">
+          filters: category <strong>hoodie</strong>,
+          sort <strong>price low to high</strong><br>page reports: 27 products · $45.00 – $88.00</p>
+      </div>
+    </div>
+
+    <figure>
+      <img src="app_check_images/03-filter-sort-vs-chat.png" alt="The Products page filtered to hoodies and sorted low to high, showing two $45 hoodies first, with the chat panel naming the same two as the cheapest.">
+      <figcaption>Filter and sort on the left, the assistant's answer on the right — both naming the same two $45 hoodies.</figcaption>
+    </figure>
+
+    <h3>What this proves</h3>
+    <div class="verdict">
+      The filtered, sorted grid leads with <strong>Ua Gameday Double Knit Hood ($45.00)</strong>
+      and <strong>Yale Sports Hoodie Tennis ($45.00)</strong>, and the assistant names those same
+      two as the cheapest of 27 hoodies. They match because they are the same
+      query: the Products page and the agent's search tool both call
+      <code>db.query_products</code>, which does the filtering, ranking and sorting in SQL.
+      <br><br>
+      This is also the fix for a real bug found in Problem 9. The earlier tool scored products
+      in Python and showed the agent only the top six by keyword relevance, so
+      “what's your cheapest hoodie?” was answered <strong>$68</strong> — the cheapest of the six
+      it happened to see — while $45 hoodies sat unseen. Nothing was invented and the answer was
+      still wrong. Sorting over the whole table in SQL is what makes the answer above correct.
+    </div>
+  </section>
+
+  <footer>
+    Captured with Playwright against the running application — frontend on
+    <code>localhost:5173</code>, FastAPI backend on <code>127.0.0.1:8000</code>, catalogue read
+    from <code>data/campus_customs.db</code>. Screenshots are in
+    <code>app_check_images/</code> and are linked by relative path.
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+# Python dependencies for the Campus Customs backend.
+#
+# Install from the backend/ folder, where the app is run:
+#   cd backend && python3 -m venv .venv && source .venv/bin/activate
+#   pip install -r requirements.txt
+#
+# backend/requirements.txt includes this file, so there is one list, not two.
+
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+pydantic[email]>=2.9.0
+pydantic-ai-slim[anthropic]>=1.0.0
+python-dotenv>=1.0.1
+anthropic>=0.49.0

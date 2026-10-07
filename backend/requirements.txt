@@ -1,0 +1,2 @@
+# The dependency list lives at the project root so there is one source of truth.
+-r ../requirements.txt

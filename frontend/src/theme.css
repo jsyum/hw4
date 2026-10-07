@@ -1,0 +1,81 @@
+/* Campus Customs — "the reading room, after hours".
+ *
+ * A classic university library late at night: deep Yale blue as the ground, oak
+ * and brass for the furniture, lamplight and parchment for anything you read.
+ * Every colour is defined here; retune the shop by editing this block alone.
+ *
+ * (This replaces the course's default forest palette — the brief for this page
+ * asks specifically for Yale blue with warm accents.)
+ */
+
+:root {
+  /* --- Yale blue, from midnight to lit --- */
+  --night-950: #060e1c;   /* the room with the lights off */
+  --night-900: #0a1628;   /* page ground */
+  --night-850: #0d1d33;   /* panels, cards */
+  --night-800: #112542;   /* raised surfaces */
+  --blue-700: #14396b;
+  --blue-600: #0f4d92;    /* Yale blue — the primary */
+  --blue-500: #2766b4;
+  --blue-300: #6ea3dd;
+
+  /* --- oak, leather, brass --- */
+  --oak-800: #3a2a1b;
+  --oak-700: #4e3824;
+  --oak-600: #6b4a2f;
+  --oak-500: #8b6340;
+  --brass-600: #a9832f;
+  --brass-500: #c9a227;   /* gold accent */
+  --brass-300: #e3c05c;
+
+  /* --- lamplight --- */
+  --lamp: #f0c67a;
+  --lamp-soft: rgba(240, 198, 122, 0.18);
+  --lamp-glow: rgba(240, 198, 122, 0.42);
+
+  /* --- parchment / ink --- */
+  --parchment: #f0e6d2;
+  --paper: #e3d8c0;
+  --ink-soft: #bfb296;
+  --ink-faint: #8d8471;
+
+  /* --- structure --- */
+  --rule: #1c3454;        /* hairline between things */
+  --rule-warm: #4a3722;
+
+  /* --- signals (used sparingly) --- */
+  --in-stock: #7fb496;
+  --low-stock: var(--brass-300);
+  --checked-out: #b04a3f;
+
+  --radius: 10px;
+  --radius-lg: 16px;
+  --shadow: 0 14px 40px rgba(0, 0, 0, 0.55);
+  --shadow-lamp: 0 0 0 1px var(--brass-600), 0 18px 50px -12px var(--lamp-glow);
+
+  --font-ui: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+
+  /* --- paw cursors (inline SVG, no external files) --- */
+  --paw-idle: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'>\
+<g fill='%23e3c05c' stroke='%23060e1c' stroke-width='1.2'>\
+<ellipse cx='14' cy='18' rx='6.4' ry='5.4'/>\
+<ellipse cx='7.4' cy='11.6' rx='2.7' ry='3.4'/>\
+<ellipse cx='12' cy='8.4' rx='2.6' ry='3.5'/>\
+<ellipse cx='17.4' cy='8.8' rx='2.6' ry='3.5'/>\
+<ellipse cx='21.6' cy='12.6' rx='2.6' ry='3.2'/>\
+</g></svg>") 14 16, auto;
+
+  --paw-press: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'>\
+<g fill='%23f0c67a' stroke='%23060e1c' stroke-width='1.3'>\
+<ellipse cx='15' cy='19.5' rx='7.4' ry='6'/>\
+<ellipse cx='7.4' cy='12' rx='3.1' ry='3.9'/>\
+<ellipse cx='12.6' cy='8.4' rx='3' ry='4'/>\
+<ellipse cx='18.6' cy='8.8' rx='3' ry='4'/>\
+<ellipse cx='23.2' cy='13' rx='3' ry='3.7'/>\
+</g>\
+<circle cx='15' cy='15' r='14' fill='none' stroke='%23f0c67a' stroke-width='1.4' opacity='0.55'/>\
+</svg>") 15 17, pointer;
+}
